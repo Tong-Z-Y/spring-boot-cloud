@@ -55,15 +55,6 @@ public class AgentVoServiceImpl extends AgentVoService {
         agentMapper.updateById(build);
     }
 
-    @Override
-    public void startPlay(String agentCode, String stream) {
-
-    }
-
-    @Override
-    public void stopPlay(String agentCode) {
-
-    }
 
     private AgentVoInfo getAgentVoInfo(Agent agent) {
         if(agent == null){

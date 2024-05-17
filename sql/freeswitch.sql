@@ -1,40 +1,3 @@
-CREATE TABLE fs_media_server (
-    id                      varchar(255)  NOT NULL COMMENT '主键id',
-    ip                      varchar(50)  NOT NULL COMMENT 'IP',
-    ssl_status              tinyint(4)  default 0 COMMENT '是否https',
-    hook_ip                 varchar(50)  NOT NULL COMMENT 'hook使用的IP（zlm访问WVP使用的IP）',
-    sdp_ip                  varchar(50)  NOT NULL COMMENT 'SDP IP',
-    stream_ip               varchar(50)  default null COMMENT '流IP',
-    http_port               int unsigned default 0 COMMENT 'HTTP端口',
-    http_ssl_port           int unsigned default 0 COMMENT 'HTTPS端口',
-    rtmp_port               int unsigned default 0 COMMENT 'RTMP端口',
-    rtmp_ssl_port           int unsigned default 0 COMMENT 'RTMPS端口',
-    rtp_proxy_port          int unsigned default 0 COMMENT 'RTP收流端口（单端口模式有用）',
-    rtsp_port               int unsigned default 0 COMMENT 'RTSP端口',
-    rtsp_ssl_port           int unsigned default 0 COMMENT 'RTSPS端口',
-    auto_config             tinyint(4) default 1 COMMENT '是否开启自动配置ZLM',
-    secret                  varchar(50)  default null COMMENT 'ZLM鉴权参数',
-    rtp_enable              tinyint(4) default 0 COMMENT '是否使用多端口模式',
-    enable                  tinyint(4) default 0 COMMENT '启用状态',
-    keepalive_time          datetime  COMMENT '心跳时间',
-    status                  tinyint(4) default 0 COMMENT '状态',
-    rtp_port_range          varchar(50)  default null COMMENT '多端口RTP收流端口范围',
-    record_assist_port      int unsigned default 0 COMMENT 'assist服务端口',
-    default_server          tinyint(4) default 0 COMMENT '是否是默认ZLM',
-    hook_alive_interval     int unsigned default 30 COMMENT 'keepalive hook触发间隔,单位秒',
-    video_play_prefix       varchar(50)  default null COMMENT '流媒体播放 代理前缀',
-    video_http_prefix       varchar(50)  default null COMMENT 'video请求时前缀',
-    create_user_id          bigint unsigned comment '创建人编号',
-    create_time             datetime  NOT NULL COMMENT '创建时间',
-    update_user_id          bigint unsigned comment '修改人编号',
-    update_time             datetime  NOT NULL COMMENT '更新时间',
-    PRIMARY KEY (id) USING BTREE,
-    UNIQUE KEY idx_http_port (ip,http_port) USING BTREE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8  ROW_FORMAT = DYNAMIC COMMENT ='流媒体服务信息';
-
-INSERT INTO fs_media_server(`id`, `ip`, `ssl_status`, `hook_ip`, `sdp_ip`, `stream_ip`, `http_port`, `http_ssl_port`, `rtmp_port`, `rtmp_ssl_port`, `rtp_proxy_port`, `rtsp_port`, `rtsp_ssl_port`, `auto_config`, `secret`, `rtp_enable`, `status`, `rtp_port_range`, `record_assist_port`, `default_server`, `hook_alive_interval`, `create_user_id`, `create_time`, `update_user_id`, `update_time`) VALUES ('516549846516848451', '192.168.1.131', 0, '192.168.1.26:8660', '192.168.1.131', '192.168.1.131', 8080, 443, 1935, 19350, 10000, 554, 332, 1, '035c73f7-bb6b-4889-a715-d9eb2d1925cc', 1, 1, '30000-30010', 0, 1, 30, 1, '2023-05-16 14:50:54', NULL, '2023-05-19 16:30:59');
-
-
 CREATE TABLE fs_platform (
     id                          bigint unsigned not null auto_increment COMMENT '主键id',
     local_ip                    varchar(30) DEFAULT null COMMENT '本机IP',
@@ -74,7 +37,6 @@ insert into fs_platform(id,local_ip,remote_ip,internal_port,external_port,start_
                         update_time)
 values(1,'192.168.1.26','192.168.1.26',5060,5080,16384,16484,5066,7443,null,null,null,null,1,'autonat:192.168.1.26','测试sip',1,0,1,1,'','','','','',1,now(),1,now());
 
-
 CREATE TABLE fs_gate_way  (
    id                                  bigint unsigned not null auto_increment COMMENT '主键id',
    name                                varchar(30) DEFAULT '' COMMENT '网关名称',
@@ -92,7 +54,6 @@ CREATE TABLE fs_gate_way  (
    update_time                         datetime  NOT NULL COMMENT '更新时间',
    PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8  ROW_FORMAT = DYNAMIC COMMENT ='网关中继信息';
-
 
 CREATE TABLE fs_route_group (
     id                              bigint unsigned not null auto_increment COMMENT '主键id',
@@ -211,6 +172,7 @@ values(1,1,1001,1001,'坐席1001','1001',1,'123456','1001',1,1,60,'1001',10,'0.0
      ,(2,1,1002,1002,'坐席1002','1002',1,'123456','1002',1,1,60,'1002',10,'0.0.0.0',0,1,null,null,null,30,3600,0,1,2,'1',now(),'1',now())
      ,(3,1,1010,1010,'坐席1010','1010',1,'123456','1010',1,1,60,'1010',10,'0.0.0.0',0,1,null,null,null,30,3600,0,1,2,'1',now(),'1',now())
      ,(4,1,1011,1011,'坐席1011','1011',1,'123456','1011',1,1,60,'1011',10,'0.0.0.0',0,1,null,null,null,30,3600,0,1,2,'1',now(),'1',now())
+     ,(4,1,1012,1012,'坐席1012','1012',1,'123456','1012',1,1,60,'1012',10,'0.0.0.0',0,1,null,null,null,30,3600,0,1,2,'1',now(),'1',now())
 ;
 
 CREATE TABLE fs_user_agent (

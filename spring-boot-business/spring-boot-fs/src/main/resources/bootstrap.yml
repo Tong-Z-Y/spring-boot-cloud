@@ -5,15 +5,6 @@ spring:
     name: fs-server
   profiles:
     active: dev
-
-sip:
-  name: fs-sip-server
-  id: fs-sip-server
-  port: 5060
-  domain: 6101251001
-video-settings:
-  # 是否开启sip日志
-  sip_log: true
 link:
   thingscloud:
     freeswitch:
